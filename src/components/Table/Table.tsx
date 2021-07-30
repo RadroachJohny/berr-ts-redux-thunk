@@ -33,11 +33,11 @@ const MainTable = () => {
         {beers.length && beers.map(({name, tagline, image_url, abv}: any) => {
           return (
 
-            <tr>
-              <th>{name}</th>
-              <th>{tagline}</th>
-              <th><img src={image_url} alt=""/></th>
-              <th>{abv}</th>
+            <tr className={classes.row}>
+              <td>{name}</td>
+              <td>{tagline}</td>
+              <td><img src={image_url} alt=""/></td>
+              <td>{abv}</td>
             </tr>
           )
         })}
