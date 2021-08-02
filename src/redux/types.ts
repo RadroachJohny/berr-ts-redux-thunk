@@ -14,6 +14,15 @@ export interface IBeer {
   image_url: string,
   first_brewed: string,
   brewers_tips: string,
+  id: number,
+}
+
+export interface IBeerElem {
+  name: string,
+  tagline: string,
+  abv: number,
+  image_url: string,
+  onClick: () => void,
 }
 
 export interface IState {
@@ -25,6 +34,7 @@ export interface IState {
 export interface ICurrentBeerReducer {
   beerElem: IBeer,
 }
+
 export interface INavigationReducers {
   page: number,
   sort: string,

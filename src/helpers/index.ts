@@ -1,13 +1,14 @@
-export default function sortedList(beers:any,sortion:string){
-  console.log(sortion);
+import {IBeer} from '../redux/types';
+
+export default function sortedList(beers: IBeer[], sorting: string){
   let sortedBeer;
 
-  if (sortion === 'ASC') {
-    sortedBeer = [...beers].sort((a: any, b: any) => {
+  if (sorting === 'ASC') {
+    sortedBeer = [...beers].sort((a: IBeer, b: IBeer) => {
       return a.abv - b.abv
     });
   } else {
-    sortedBeer = [...beers].sort((a: any, b: any) => {
+    sortedBeer = [...beers].sort((a: IBeer, b: IBeer) => {
       return b.abv - a.abv
     });
   }

@@ -1,4 +1,4 @@
-import {IAction} from "../types";
+import {IAction, IBeer} from '../types';
 
 const initialState = {
   beers: [],

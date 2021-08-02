@@ -1,10 +1,11 @@
-import sortedList from "../../helpers";
-import {IBeer} from "../types";
+import sortedList from '../../helpers';
+import {IBeer} from '../types';
 
 export const beersLoad = (beers: IBeer[]) => ({
   type: 'BEERS_LOAD',
   beers
 })
+
 export const pageChange = (page: number) => ({
   type: 'PAGE_CHANGE',
   page
@@ -19,7 +20,6 @@ export const reverseSorting = (sort: string) => ({
   type: 'REVERSE_SORTING',
   sort
 });
-
 
 export const getBeerListThunk = (currentPage: number, sort: string) => {
 

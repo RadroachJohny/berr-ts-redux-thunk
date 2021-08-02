@@ -1,21 +1,19 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
-import MainTable from "./components/Table/Table";
-import BeerInfoModal from "./components/BeerInfoModal/BeerInfoModal";
+import {useSelector} from 'react-redux';
 
-import './App.css';
-import { useSelector } from "react-redux";
+import MainTable from './components/Table/Table';
+import BeerInfoModal from './components/BeerInfoModal/BeerInfoModal';
 
-
+import {IState} from './redux/types';
 
 function App() {
-    const beer = useSelector((state: any) => state.currentBeerReducer.beerElem);
+  const beer = useSelector((state: IState) => state.currentBeerReducer.beerElem);
 
-    return <>
-        {!beer && <MainTable/>}
-        {beer && <BeerInfoModal {...beer} />}
-    </>
-
+  return <>
+    {!beer && <MainTable/>}
+    {beer && <BeerInfoModal beer={beer}/>}
+  </>
 }
 
 export default App;

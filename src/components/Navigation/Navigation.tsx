@@ -1,13 +1,13 @@
 import React from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch, useSelector} from 'react-redux';
 
 import { getBeerListThunk} from '../../redux/actions';
-import {IState} from "../../redux/types";
+import {IState} from '../../redux/types';
 
 const Navigation = () => {
+  const dispatch = useDispatch();
   const page = useSelector((state: IState) => state.navigationReducers.page);
   const sort = useSelector((state: IState) => state.navigationReducers.sort);
-  const dispatch = useDispatch();
 
   const nextPage =() => {
     dispatch(getBeerListThunk(page + 1, sort))

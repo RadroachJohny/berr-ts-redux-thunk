@@ -4,7 +4,6 @@
   min-height: 100vh;
   background-color: #cecece;
 }
-
 .table {
   width: 100%;
   margin: 0 auto;
@@ -12,13 +11,23 @@
   border-width: 1px;
   border-color: #000000;
   border-collapse: collapse;
+  &-name {
+    width: 40%;
+  }
+  &-descr {
+    width: 40%;
+  } &-photo {
+      width: 10%;
+    }
+  &-abv {
+    width: 10%;
+  }
 
   &-wrapper {
-
-    height: 900px;
+    padding-top: 2rem;
+    height: 80vh;
     overflow-y: scroll;
-
-
+    border-bottom: 1px solid #000000;
   }
 
   th {
@@ -40,6 +49,7 @@
 
 }
 .mainWrapper {
+  position: relative;
   width: 65%;
   margin: 0 auto;
 }

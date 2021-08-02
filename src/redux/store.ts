@@ -2,14 +2,18 @@ import {applyMiddleware, createStore} from 'redux'
 import thunk from 'redux-thunk';
 import {composeWithDevTools} from 'redux-devtools-extension/logOnlyInProduction'
 
-import rootReducer from './reducers/index'
+import rootReducer from './reducers';
+
 
 export const configureStore = () => {
-
-  return createStore(
+  const store = createStore(
     rootReducer,
-    composeWithDevTools(
-      applyMiddleware(thunk),
+    composeWithDevTools(applyMiddleware(thunk),
     ),
   )
-}
+
+  return store
+};
+
+
+
