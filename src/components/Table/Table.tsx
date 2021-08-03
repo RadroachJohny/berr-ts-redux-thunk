@@ -56,6 +56,9 @@ const MainTable = () => {
 
   const [showCart, setShowCart] = useState(false);
 
+  console.log(beers);
+  
+
   const beersArr = beers.length > 0;
 
   useEffect(() => {
@@ -76,7 +79,7 @@ const MainTable = () => {
   }, [alertStatus])
 
   useEffect(() => {
-    if(!purchasedBeerList.length) {
+    if(!purchasedBeerList.length && beers.length) {
       toggleModal();
     }
   }, [purchasedBeerList])

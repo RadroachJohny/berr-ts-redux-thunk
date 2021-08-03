@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 
 import {useSelector} from 'react-redux';
 
@@ -9,6 +9,7 @@ import {IState} from './redux/types';
 
 function App() {
   const beer = useSelector((state: IState) => state.currentBeerReducer.beerElem);
+  
 
   return <>
     <MainTable/>
