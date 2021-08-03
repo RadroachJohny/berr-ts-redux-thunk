@@ -1,9 +1,22 @@
-.container {
-  position: relative;
+.overlay {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0;
+  left: 0;
   width: 100%;
-  min-height: 100vh;
-  background-color: #cecece;
+  height: 100%;
+  background-color: rgba(149, 158, 97, 0.5);
 }
+
+.cart {
+  width: 750px;
+  height: 500px;
+  background-color: #fff;
+  overflow-y: auto;
+}
+
 .table {
   width: 100%;
   margin: 0 auto;
@@ -16,24 +29,15 @@
   }
   &-descr {
     width: 40%;
-  }
-  &-photo {
+  } &-photo {
       width: 10%;
     }
   &-abv {
-    width: 5%;
-  }
-  &-add {
-    max-width: 25px;
-    width: 25px;
-    overflow: hidden;
+    width: 10%;
   }
 
   &-wrapper {
     position: relative;
-    //display: flex;
-    //align-items: center;
-    //justify-content: center;
     padding-top: 2rem;
     height: 80vh;
     overflow-y: scroll;
@@ -58,9 +62,7 @@
   }
 
 }
-.mainWrapper {
-  position: relative;
-  width: 65%;
-  margin: 0 auto;
-}
 
+.emptyCart {
+  text-align: center !important;
+}

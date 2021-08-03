@@ -21,21 +21,48 @@ export const reverseSorting = (sort: string) => ({
   sort
 });
 
+export const fetchingDataStatus = (isFetch: boolean, errorStatus: boolean | null) => ({
+  type: 'IS_FETCHING',
+  isFetch,
+  errorStatus
+})
+
+export const removeStatusMessage = () => ({
+  type: 'REMOVE_STATUS_MESSAGE',
+})
+
+export const addSingleBeerProduct = (purchasedBeerArr: any) => ({
+  type: 'ADD_ONE_BEER_TYPE',
+  purchasedBeerArr,
+})
+export const removeSingleBeerProduct = (purchasedBeerArr: any) => ({
+  type: 'REMOVE_ONE_BEER_TYPE',
+  purchasedBeerArr,
+})
+
+
 export const getBeerListThunk = (currentPage: number, sort: string) => {
 
   return function (dispatch: any) {
-    fetch(`https://api.punkapi.com/v2/beers?page=${currentPage}&per_page=25`)
-      .then(res => {
-        return res.json()
-      },
-        error => console.log('An error occurred.', error)
-      )
-      .then(res => {
+
+    dispatch(fetchingDataStatus(true, false));
+
+
+    const getBeerListFromAPI = async() => {
+      const request = await fetch(`https://api.punkapi.com/v2/beers?page=${currentPage}&per_page=25`);
+      const response = await request.json();
+      return response
+    }
+
+    setTimeout(() => {
+      getBeerListFromAPI().then(res => {
         if (!res.length) return
         const sortedBeer = sortedList(res, sort)
         dispatch(beersLoad(sortedBeer))
         dispatch(pageChange(currentPage))
+        dispatch(fetchingDataStatus(false, true ));
       })
+    }, 500)
   }
 }
 

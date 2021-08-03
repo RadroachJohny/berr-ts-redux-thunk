@@ -1,9 +1,13 @@
+import addedProductsReducer from "./reducers/addedProductsReducer";
+
 export interface IAction {
   beers?: IBeer[],
   page?: number,
   sort?: string,
   type: string,
   beerElem?: IBeer | null,
+  isFetch: boolean,
+  errorStatus: boolean | string
 }
 
 export interface IBeer {
@@ -22,13 +26,20 @@ export interface IBeerElem {
   tagline: string,
   abv: number,
   image_url: string,
-  onClick: () => void,
+  onClick?: () => void,
+  id?: number,
+  quantity?: number
 }
 
 export interface IState {
-  beerReducer: IBeer[],
+  beerReducer: { beers: IBeer[], isFetch: boolean, errorStatus: boolean | string },
   currentBeerReducer: ICurrentBeerReducer,
   navigationReducers: INavigationReducers,
+  addedProductsReducer: IPurchasedBeer,
+}
+
+export interface IPurchasedBeer {
+  purchasedBeerArr: IBeerElem[],
 }
 
 export interface ICurrentBeerReducer {

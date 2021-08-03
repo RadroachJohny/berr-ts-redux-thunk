@@ -11,7 +11,7 @@ function App() {
   const beer = useSelector((state: IState) => state.currentBeerReducer.beerElem);
 
   return <>
-    {!beer && <MainTable/>}
+    <MainTable/>
     {beer && <BeerInfoModal beer={beer}/>}
   </>
 }
