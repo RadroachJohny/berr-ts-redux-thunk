@@ -4,12 +4,9 @@ import { useSelector } from 'react-redux';
 import classes from './styles.module.scss';
 import {IBeerElem} from "../../redux/types";
 import TableRow from "../Table/TableRow/TableRow";
-import {log} from "util";
 
 
 const ProductCartModal = (props: any) => {
-
-  // const [cartIsEmpty, setCartIsEmpty] = useState(true);
   const overlay = React.useRef<HTMLDivElement>(null);
 
   const purchasedBeerList = useSelector((state: any) => state.addedProductsReducer.purchasedBeerArr);
@@ -17,8 +14,6 @@ const ProductCartModal = (props: any) => {
   const cartIsEmpty = purchasedBeerList.length === 0;
 
   console.log(cartIsEmpty);
-
-  // {cartIsEmpty && <div className={classes.emptyCart}>Your cart is empty</div>}
 
   const closeModal = (e: any) => {
     if (e.target === overlay.current) {

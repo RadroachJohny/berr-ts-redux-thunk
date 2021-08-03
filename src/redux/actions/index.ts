@@ -1,5 +1,5 @@
 import sortedList from '../../helpers';
-import {IBeer} from '../types';
+import {IBeer, IBeerElem} from '../types';
 
 export const beersLoad = (beers: IBeer[]) => ({
   type: 'BEERS_LOAD',
@@ -31,11 +31,11 @@ export const removeStatusMessage = () => ({
   type: 'REMOVE_STATUS_MESSAGE',
 })
 
-export const addSingleBeerProduct = (purchasedBeerArr: any) => ({
+export const addSingleBeerProduct = (purchasedBeerArr: IBeerElem) => ({
   type: 'ADD_ONE_BEER_TYPE',
   purchasedBeerArr,
 })
-export const removeSingleBeerProduct = (purchasedBeerArr: any) => ({
+export const removeSingleBeerProduct = (purchasedBeerArr: IBeerElem[]) => ({
   type: 'REMOVE_ONE_BEER_TYPE',
   purchasedBeerArr,
 })

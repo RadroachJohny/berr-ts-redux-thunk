@@ -28,7 +28,12 @@ export interface IBeerElem {
   image_url: string,
   onClick?: () => void,
   id?: number,
-  quantity?: number
+  quantity?: number, 
+}
+
+export interface IBeerModalElems {
+  type: string,
+  purchasedBeerArr: IBeerElem | IBeerElem[],
 }
 
 export interface IState {
