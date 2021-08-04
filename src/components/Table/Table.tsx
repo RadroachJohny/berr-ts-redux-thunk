@@ -56,9 +56,6 @@ const MainTable = () => {
 
   const [showCart, setShowCart] = useState(false);
 
-  console.log(beers);
-  
-
   const beersArr = beers.length > 0;
 
   useEffect(() => {

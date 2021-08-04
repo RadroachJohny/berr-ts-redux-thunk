@@ -13,8 +13,6 @@ const ProductCartModal = (props: any) => {
 
   const cartIsEmpty = purchasedBeerList.length === 0;
 
-  console.log(cartIsEmpty);
-
   const closeModal = (e: any) => {
     if (e.target === overlay.current) {
       props.hideModal();
@@ -34,6 +32,8 @@ const ProductCartModal = (props: any) => {
 						<th className={classes['table-descr']}>Tagline</th>
 						<th className={classes['table-photo']}>Photo</th>
 						<th className={classes['table-abv']}>ABV</th>
+						<th className={classes['table-abv']}>Amount</th>
+						<th className={classes['table-abv']}>Action</th>
 					</tr>
 					</thead>
 

@@ -49,7 +49,7 @@ const TableRow = (props: IBeerElem) => {
       {!inStock ? <td className={classes.add}>
         <input value={inputVal} onChange={testFunc} min='1' type="number"/>
         <button onClick={addProduct}>buy</button>
-      </td> : <button onClick={removeItem}>delete</button>}
+      </td> : <td><button onClick={removeItem}>delete</button></td>}
     </tr>
     </tbody>
   )
