@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
 
-import classes from './styles.module.scss';
-import {IBeerElem} from "../../redux/types";
 import TableRow from "../Table/TableRow/TableRow";
+import {IBeerElem, IState} from "../../redux/types";
+
+import classes from './styles.module.scss';
 
 
 const ProductCartModal = (props: any) => {
-  const overlay = React.useRef<HTMLDivElement>(null);
-
-  const purchasedBeerList = useSelector((state: any) => state.addedProductsReducer.purchasedBeerArr);
+  const overlay = useRef<HTMLDivElement>(null);
+  const purchasedBeerList = useSelector((state: IState) => state.addedProductsReducer.purchasedBeerArr);
 
   const cartIsEmpty = purchasedBeerList.length === 0;
 
-  const closeModal = (e: any) => {
+  const closeModal = (e: React.MouseEvent<HTMLElement>) => {
     if (e.target === overlay.current) {
       props.hideModal();
     }

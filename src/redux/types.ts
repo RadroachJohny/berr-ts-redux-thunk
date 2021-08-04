@@ -22,14 +22,18 @@ export interface IBeer {
 }
 
 export interface IBeerElem {
-  name: string,
-  tagline: string,
   abv: number,
-  image_url: string,
-  onClick?: () => void,
   id?: number,
-  quantity?: number, 
+  image_url: string,
+  name: string,
+  quantity?: number,
+  tagline: string,
+  onClick?: () => void,
 }
+
+// export interface purchasedBeerList {
+//   IBeerElem
+// }
 
 export interface IBeerModalElems {
   type: string,

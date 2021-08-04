@@ -1,21 +1,20 @@
-import React, {useState, useCallback} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
-import {useEffect} from 'react';
-
-import {makeStyles} from '@material-ui/core/styles';
+import React, { useState, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 
 import Navigation from '../Navigation/Navigation';
 import TableRow from './TableRow/TableRow';
 import Alert from '@material-ui/lab/Alert';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ProductModal from '../CartModal/ProductCartModal';
+import {Button} from "@material-ui/core";
 
 import {currentBeerElem, getBeerListThunk, beersLoad, reverseSorting, removeStatusMessage} from '../../redux/actions';
 import {IBeer, IState} from '../../redux/types';
-import sortedList from '../../helpers';
 
+import sortedList from '../../helpers';
 import classes from './styles.module.scss';
-import {Button} from "@material-ui/core";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -38,23 +37,20 @@ const useStyles = makeStyles((theme) => ({
     right: '5%',
   }
 
-
 }));
 
 
 const MainTable = () => {
+  const [showCart, setShowCart] = useState(false);
+  const dispatch = useDispatch()
   const classUi = useStyles();
 
-  const dispatch = useDispatch()
   const beers = useSelector((state: IState) => state.beerReducer.beers)
   const page = useSelector((state: IState) => state.navigationReducers.page);
   const sort = useSelector((state: IState) => state.navigationReducers.sort);
   const purchasedBeerList = useSelector((state: any) => state.addedProductsReducer.purchasedBeerArr);
-
   const isFetching = useSelector((state: IState) => state.beerReducer.isFetch);
   const alertStatus = useSelector((state: IState) => state.beerReducer.errorStatus);
-
-  const [showCart, setShowCart] = useState(false);
 
   const beersArr = beers.length > 0;
 
@@ -76,7 +72,7 @@ const MainTable = () => {
   }, [alertStatus])
 
   useEffect(() => {
-    if(!purchasedBeerList.length && beers.length) {
+    if(!purchasedBeerList.length && beers.length && showCart) {
       toggleModal();
     }
   }, [purchasedBeerList])

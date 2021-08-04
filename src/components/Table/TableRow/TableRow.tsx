@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import {IBeerElem, IState} from '../../../redux/types';
 import {addSingleBeerProduct, removeSingleBeerProduct} from "../../../redux/actions";
@@ -34,7 +33,7 @@ const TableRow = (props: IBeerElem) => {
     dispatch(removeSingleBeerProduct(filteredArr));
   };
 
-  const testFunc = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const productAmountNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
   setInputVal(+e.target.value);
   }
 
@@ -47,7 +46,7 @@ const TableRow = (props: IBeerElem) => {
       <td>{props.abv}</td>
       {props.quantity && <td>{props.quantity}</td>}
       {!inStock ? <td className={classes.add}>
-        <input value={inputVal} onChange={testFunc} min='1' type="number"/>
+        <input value={inputVal} onChange={productAmountNumber} min='1' type="number"/>
         <button onClick={addProduct}>buy</button>
       </td> : <td><button onClick={removeItem}>delete</button></td>}
     </tr>
