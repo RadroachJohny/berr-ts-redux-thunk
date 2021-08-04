@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const MainTable = () => {
+const MainTable = ({toggleChart} : {toggleChart: () => void}) => {
   const [showCart, setShowCart] = useState(false);
   const dispatch = useDispatch()
   const classUi = useStyles();
@@ -78,6 +78,7 @@ const MainTable = () => {
   }, [purchasedBeerList])
 
   const currentElemModal = (beer: IBeer) => {
+    console.log(beer)
     dispatch(currentBeerElem(beer));
   }
 
@@ -139,7 +140,7 @@ const MainTable = () => {
 
       </div>
 
-      <Navigation/>
+      <Navigation toggleChart={toggleChart}/>
     </div>
     <Button onClick={toggleModal} className={classUi.cartBtn} variant="contained" color="primary">CART</Button>
     {showCart && <ProductModal hideModal={toggleModal}/>}

@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import { getBeerListThunk} from '../../redux/actions';
 import {IState} from '../../redux/types';
 
-const Navigation = () => {
+const Navigation = ({toggleChart}: {toggleChart: () => void}) => {
   const dispatch = useDispatch();
   const page = useSelector((state: IState) => state.navigationReducers.page);
   const sort = useSelector((state: IState) => state.navigationReducers.sort);
@@ -24,6 +24,7 @@ const Navigation = () => {
       <button onClick={prevPage}>Prev page</button>
       <span>{page}</span>
       <button onClick={nextPage}>Next page</button>
+      <button onClick={toggleChart}>Show Chart</button>
     </div>
   )
 };
