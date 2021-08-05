@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from 'victory';
 
 import {connect} from "react-redux";
-import {IBeer} from "../../redux/types";
+import {IBeer, IState} from "../../redux/types";
 import {currentBeerElem} from "../../redux/actions";
 
 import classes from './styles.module.scss';
@@ -15,8 +15,7 @@ type AbvState = {
 };
 
 class AbvChart extends Component<AbvState, {arrBeers: IBeer[] | undefined}> {
-// class AbvChart extends Component<{allBeerArr: IBeer[], toggleChart: ()=> void, currentBeerElem: (arg0: IBeer)=> void}, {arrBeers: IBeer[] | undefined}> {
-  constructor(props: any) {
+  constructor(props: AbvState) {
     super(props);
 
     this.state = {
@@ -24,31 +23,27 @@ class AbvChart extends Component<AbvState, {arrBeers: IBeer[] | undefined}> {
     }
   }
 
-  componentDidUpdate(prevProps:any) {
+  componentDidUpdate(prevProps: AbvState) {
     if (prevProps.allBeerArr !== this.props.allBeerArr) {
       this.setState({arrBeers: this.props.allBeerArr})
     }
   }
 
-  testFunc(obj: any) {
-    console.log(this.props);
-  }
-
   openBeerInfoModal(id:number) {
-    console.log(id);
     const chosenBeerElem = this.state.arrBeers && this.state.arrBeers.find(elem => elem.id === +id);
-    console.log(this.state.arrBeers);
-    console.log(chosenBeerElem);
+
     if(chosenBeerElem) {
+      const {name, tagline, abv, description, image_url, first_brewed, brewers_tips, id} = chosenBeerElem;
+
       const cleanBeerElem = {
-        name: chosenBeerElem.name,
-        tagline: chosenBeerElem!.tagline,
-        abv: chosenBeerElem!.abv,
-        description: chosenBeerElem!.description,
-        image_url: chosenBeerElem!.image_url,
-        first_brewed: chosenBeerElem!.first_brewed,
-        brewers_tips: chosenBeerElem!.brewers_tips,
-        id: chosenBeerElem!.id,
+        name,
+        tagline,
+        abv,
+        description,
+        image_url,
+        first_brewed,
+        brewers_tips,
+        id
       }
       this.props.currentBeerElem(cleanBeerElem);
     }
@@ -110,12 +105,12 @@ class AbvChart extends Component<AbvState, {arrBeers: IBeer[] | undefined}> {
 
  }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: IState) => ({
   allBeerArr: state.beerReducer.beers
 })
 
-const mapDispatchToProps = (dispatch: any) => ({
-  currentBeerElem: (beerElem: any) => dispatch(currentBeerElem(beerElem)),
+const mapDispatchToProps = (dispatch: (arg0: { type: string; beerElem: IBeer | null; }) => void) => ({
+  currentBeerElem: (beerElem: IBeer | null) => dispatch(currentBeerElem(beerElem)),
 })
 
 
