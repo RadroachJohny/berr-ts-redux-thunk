@@ -1,5 +1,3 @@
-import addedProductsReducer from "./reducers/addedProductsReducer";
-
 export interface IAction {
   beers?: IBeer[],
   page?: number,
@@ -31,10 +29,6 @@ export interface IBeerElem {
   onClick?: () => void,
 }
 
-// export interface purchasedBeerList {
-//   IBeerElem
-// }
-
 export interface IBeerModalElems {
   type: string,
   purchasedBeerArr: IBeerElem | IBeerElem[],
@@ -45,6 +39,7 @@ export interface IState {
   currentBeerReducer: ICurrentBeerReducer,
   navigationReducers: INavigationReducers,
   addedProductsReducer: IPurchasedBeer,
+  visitedProductReducer: { visitedProdInfo: IVisitedArr[] },
 }
 
 export interface IPurchasedBeer {
@@ -59,3 +54,16 @@ export interface INavigationReducers {
   page: number,
   sort: string,
 }
+
+export interface IVisitedProductReducer {
+  type: string,
+  visitedProdInfo: IVisitedArr
+}
+
+export interface IVisitedArr {
+  productName: string | '',
+  timeSpent: number,
+  id?: number
+}
+
+export type GreetFunction = (arg0: { type: string; visitedProdInfo?: IVisitedArr; beerElem?: IBeer | null; }) => void;

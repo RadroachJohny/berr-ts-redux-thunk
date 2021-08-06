@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from 'victory';
 
 import {connect} from "react-redux";
-import {IBeer, IState} from "../../redux/types";
+import { IBeer, IState } from "../../redux/types";
 import {currentBeerElem} from "../../redux/actions";
 
 import classes from './styles.module.scss';
@@ -68,13 +68,13 @@ class AbvChart extends Component<AbvState, {arrBeers: IBeer[] | undefined}> {
                 {
                   target: "data",
                   eventHandlers: {
-                    onClick: (e:any) => {
+                    onClick: (e: any) => {
+                      console.log(e)
                       return [
                         {
                           target: 'data',
-                          mutation: (props:any) => {
-                            console.log(e.target)
-                            console.log(props);
+                          mutation: (props: any) => {
+                            console.log(props)
                             this.openBeerInfoModal(props.datum.id);
                           }
                         }
@@ -85,15 +85,9 @@ class AbvChart extends Component<AbvState, {arrBeers: IBeer[] | undefined}> {
               ]}
             />
 
-            <VictoryAxis
-              // tickValues specifies both the number of ticks and where
-              // they are placed on the axis
-              // tickValues={[1, 2, 3, 4, 5, 6, 7]}
-              // tickFormat={["Product name", "2", "3", "4", "5", "6", "7"]}
-            />
+            <VictoryAxis/>
             <VictoryAxis
               dependentAxis
-              // tickFormat specifies how ticks should be displayed
               tickFormat={(x) => (x)}
             />
 

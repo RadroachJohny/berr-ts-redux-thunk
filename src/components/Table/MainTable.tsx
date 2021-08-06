@@ -11,7 +11,7 @@ import ProductModal from '../CartModal/ProductCartModal';
 import {Button} from "@material-ui/core";
 
 import {currentBeerElem, getBeerListThunk, beersLoad, reverseSorting, removeStatusMessage} from '../../redux/actions';
-import {IBeer, IState} from '../../redux/types';
+import {IBeer, IState, IPurchasedBeer } from '../../redux/types';
 
 import sortedList from '../../helpers';
 import classes from './styles.module.scss';
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
   },
   cartBtn: {
     position: 'absolute',
-    top: '50%',
+    bottom: '20%',
     right: '5%',
   }
 
@@ -45,10 +45,10 @@ const MainTable = ({toggleChart} : {toggleChart: () => void}) => {
   const dispatch = useDispatch()
   const classUi = useStyles();
 
-  const beers = useSelector((state: IState) => state.beerReducer.beers)
+  const beers = useSelector((state: IState) => state.beerReducer.beers);
   const page = useSelector((state: IState) => state.navigationReducers.page);
   const sort = useSelector((state: IState) => state.navigationReducers.sort);
-  const purchasedBeerList = useSelector((state: any) => state.addedProductsReducer.purchasedBeerArr);
+  const purchasedBeerList = useSelector((state:  IState) => state.addedProductsReducer.purchasedBeerArr);
   const isFetching = useSelector((state: IState) => state.beerReducer.isFetch);
   const alertStatus = useSelector((state: IState) => state.beerReducer.errorStatus);
 
@@ -57,6 +57,7 @@ const MainTable = ({toggleChart} : {toggleChart: () => void}) => {
   useEffect(() => {
     dispatch(getBeerListThunk(page, sort))
   }, [page])
+  // }, [page, dispatch, sort])
 
   useEffect(() => {
     if (alertStatus) {
@@ -69,7 +70,8 @@ const MainTable = ({toggleChart} : {toggleChart: () => void}) => {
         clearTimeout(showStatusMessageTimer);
       }
     }
-  }, [alertStatus])
+  }, [alertStatus, dispatch])
+  // }, [alertStatus])
 
   useEffect(() => {
     if(!purchasedBeerList.length && beers.length && showCart) {
@@ -100,7 +102,7 @@ const MainTable = ({toggleChart} : {toggleChart: () => void}) => {
   ;
 
 
-  return <div className={classes.container}>
+  return <div className={classes.main}>
 
     {alertStatus && <div className={classUi.successAlert}>
 			<Alert severity="success">This is a success alert — check it out!</Alert>

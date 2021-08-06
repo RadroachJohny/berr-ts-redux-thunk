@@ -1,19 +1,66 @@
-import React from 'react';
-import {useDispatch} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from "react-redux";
 
-import {currentBeerElem} from '../../redux/actions';
-import {IBeer} from '../../redux/types';
+import { addVisitedProductInfo, currentBeerElem } from '../../redux/actions';
+import {IBeer, IVisitedArr, GreetFunction} from '../../redux/types';
 
 import classes from './styles.module.scss';
 
-const BeerInfoModal = ({beer}: { beer: IBeer }) => {
-    const dispatch = useDispatch();
-    const {name, tagline, abv, description: descr, image_url: picUrl, first_brewed: brewed, brewers_tips: tips} = beer;
 
-    const closeModal = () => dispatch(currentBeerElem(null))
+type BeerInfoModalType = {
+    beer: IBeer,
+    currentBeerElem: (arg0: null)=> void,
+    addVisitedProductInfo: (arg0: IVisitedArr) => void
+};
+
+type BeerInfoModalStateType = {
+    productName: string | '',
+    timeStart: number,
+    timeEnd: number,
+}
+
+
+class BeerInfoModal extends Component<BeerInfoModalType, BeerInfoModalStateType> {
+    constructor(props: BeerInfoModalType) {
+        super(props)
+
+        this.state = {
+            productName: '',
+            timeStart: 0,
+            timeEnd: 0,
+
+        }
+    }
+
+    componentDidMount() {
+        const timeStart = Date.now();
+        this.setState((prevState: BeerInfoModalStateType) => ({
+            ...this.state,
+            productName: this.props.beer.name,
+            timeStart: timeStart,
+
+        }))
+    }
+
+    componentWillUnmount() {
+        const timeEnd = Date.now();
+        const timeDifference = timeEnd - this.state.timeStart;
+        this.props.addVisitedProductInfo({productName: this.state.productName, timeSpent: timeDifference});
+
+
+    }
+
+
+    closeModal = () => this.props.currentBeerElem(null)
+
+
+
+    render() {
+        const {name, tagline, abv, description: descr, image_url: picUrl, first_brewed: brewed, brewers_tips: tips} = this.props.beer;
 
     return (
-    <div onClick={closeModal} className={classes['info-overlay']}>
+    <div  className={classes['info-overlay']}>
+    <div onClick={this.closeModal} className={classes['info-overlay']}>
         <div className={classes['info-wrapper']}>
             <div className={`${classes['info-content']} ${classes['info__picture-wrapper']}`}>
                 {picUrl && <img className={classes['info-picture']} src={picUrl} alt={name}/>}
@@ -29,7 +76,15 @@ const BeerInfoModal = ({beer}: { beer: IBeer }) => {
             </div>
         </div>
     </div>
+    </div>
     )
+    }
 };
 
-export default BeerInfoModal;
+
+const mapDispatchToProps = (dispatch: GreetFunction) => ({
+    addVisitedProductInfo: (visitedProdInfo: IVisitedArr) => dispatch(addVisitedProductInfo(visitedProdInfo)),
+    currentBeerElem: (beerElem: null) => dispatch(currentBeerElem(null)),
+});
+
+export default connect(null, mapDispatchToProps)(BeerInfoModal);

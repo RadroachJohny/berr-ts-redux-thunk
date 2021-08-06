@@ -14,6 +14,3 @@ export const configureStore = () => {
 
   return store
 };
-
-
-

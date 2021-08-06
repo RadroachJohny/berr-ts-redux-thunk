@@ -1,7 +1,7 @@
 import {Dispatch} from "react";
 
 import sortedList from '../../helpers';
-import {IBeer, IBeerElem} from '../types';
+import {IBeer, IBeerElem, IVisitedArr} from '../types';
 
 
 const BEERS_LOAD = 'BEERS_LOAD';
@@ -60,6 +60,11 @@ export const addSingleBeerProduct = (purchasedBeerArr: IBeerElem) => ({
 export const removeSingleBeerProduct = (purchasedBeerArr: IBeerElem[]) => ({
   type: 'REMOVE_ONE_BEER_TYPE',
   purchasedBeerArr,
+})
+
+export const addVisitedProductInfo = (visitedProdInfo: IVisitedArr) => ({
+  type: 'ADD_VISITED_PRODUCT_INFO',
+  visitedProdInfo
 })
 
 type ActionsType = fetchingDataStatus | beersLoad | pageChange;

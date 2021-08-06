@@ -5,8 +5,10 @@ import {useSelector} from 'react-redux';
 import AbvChart from "./components/AbvChart/AbvChart";
 import MainTable from './components/Table/MainTable';
 import BeerInfoModal from './components/BeerInfoModal/BeerInfoModal';
+import Sidebar from './components/Sidebar/Sidebar';
 
 import {IState} from './redux/types';
+import classes from "./App.module.scss";
 
 
 function App() {
@@ -16,10 +18,13 @@ function App() {
   const toggleChart = () => {
     setShowChart(prev => !prev)
   }
-  
 
   return <>
-    <MainTable toggleChart={toggleChart}/>
+    <div className={classes.container}>
+      <MainTable toggleChart={toggleChart}/>
+      <Sidebar />
+    </div>
+
     {beer && <BeerInfoModal beer={beer}/>}
     {showChart && <AbvChart toggleChart={toggleChart}/>}
   </>
