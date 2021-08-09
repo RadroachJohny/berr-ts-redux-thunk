@@ -5,6 +5,7 @@ import navigationReducers from './navigationReducers';
 import currentBeerReducer from './currentBeerReducer';
 import addedProductsReducer from "./addedProductsReducer";
 import visitedProductReducer from "./visitedProductReducer";
+import favouritesProductReducer from './favouritesProductReducer';
 
 
 export default combineReducers({
@@ -12,5 +13,6 @@ export default combineReducers({
 	navigationReducers,
 	currentBeerReducer,
 	addedProductsReducer,
-	visitedProductReducer
+	visitedProductReducer,
+	favouritesProductReducer
 })

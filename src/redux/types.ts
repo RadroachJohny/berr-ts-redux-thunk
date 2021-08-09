@@ -1,3 +1,5 @@
+import favouritesProductReducer from "./reducers/favouritesProductReducer";
+
 export interface IAction {
   beers?: IBeer[],
   page?: number,
@@ -21,12 +23,13 @@ export interface IBeer {
 
 export interface IBeerElem {
   abv: number,
-  id?: number,
+  id: number,
   image_url: string,
   name: string,
   quantity?: number,
   tagline: string,
   onClick?: () => void,
+  showFav?: boolean
 }
 
 export interface IBeerModalElems {
@@ -40,6 +43,7 @@ export interface IState {
   navigationReducers: INavigationReducers,
   addedProductsReducer: IPurchasedBeer,
   visitedProductReducer: { visitedProdInfo: IVisitedArr[] },
+  favouritesProductReducer: {favouritesArr: IBeerElem[]}
 }
 
 export interface IPurchasedBeer {

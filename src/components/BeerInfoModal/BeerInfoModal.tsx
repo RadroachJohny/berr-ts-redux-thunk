@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { connect } from "react-redux";
+import { connect } from 'react-redux';
 
 import { addVisitedProductInfo, currentBeerElem } from '../../redux/actions';
 import {IBeer, IVisitedArr, GreetFunction} from '../../redux/types';
@@ -46,13 +46,9 @@ class BeerInfoModal extends Component<BeerInfoModalType, BeerInfoModalStateType>
         const timeEnd = Date.now();
         const timeDifference = timeEnd - this.state.timeStart;
         this.props.addVisitedProductInfo({productName: this.state.productName, timeSpent: timeDifference});
-
-
     }
 
-
     closeModal = () => this.props.currentBeerElem(null)
-
 
 
     render() {

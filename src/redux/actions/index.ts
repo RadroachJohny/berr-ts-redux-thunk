@@ -7,23 +7,25 @@ import {IBeer, IBeerElem, IVisitedArr} from '../types';
 const BEERS_LOAD = 'BEERS_LOAD';
 const IS_FETCHING = 'IS_FETCHING';
 const PAGE_CHANGE = 'PAGE_CHANGE';
+const ADD_TO_FAVOURITE_LIST = 'ADD_TO_FAVOURITE_LIST';
+const REMOVE_FROM_FAVOURITE_LIST = 'REMOVE_FROM_FAVOURITE_LIST';
 
-export const beersLoad = (beers: IBeer[]): beersLoad => ({
+export const beersLoad = (beers: IBeer[]): beersLoadType => ({
   type: BEERS_LOAD,
   beers
 })
 
-export type beersLoad = {
+export type beersLoadType = {
   type: typeof BEERS_LOAD,
   beers: IBeer[]
 }
 
-export const pageChange = (page: number): pageChange => ({
+export const pageChange = (page: number): pageChangeType => ({
   type: PAGE_CHANGE,
   page
 })
 
-export type pageChange = {
+export type pageChangeType = {
   type: 'PAGE_CHANGE',
   page: number
 }
@@ -38,12 +40,12 @@ export const reverseSorting = (sort: string) => ({
   sort
 });
 
-export const fetchingDataStatus = (isFetch: boolean, errorStatus: boolean | null): fetchingDataStatus => ({
+export const fetchingDataStatus = (isFetch: boolean, errorStatus: boolean | null): fetchingDataStatusType => ({
   type: 'IS_FETCHING',
   isFetch,
   errorStatus
 })
-export type fetchingDataStatus = {
+export type fetchingDataStatusType = {
   type: typeof IS_FETCHING,
   isFetch: boolean,
   errorStatus: boolean | null
@@ -67,7 +69,27 @@ export const addVisitedProductInfo = (visitedProdInfo: IVisitedArr) => ({
   visitedProdInfo
 })
 
-type ActionsType = fetchingDataStatus | beersLoad | pageChange;
+export type addToFavouriteListType = {
+  type: typeof ADD_TO_FAVOURITE_LIST,
+  id: number
+}
+
+export const addToFavouriteList = (id: any): addToFavouriteListType => ({
+  type: ADD_TO_FAVOURITE_LIST,
+  id
+})
+
+export type removeFromFavouriteListType = {
+  type: typeof REMOVE_FROM_FAVOURITE_LIST,
+  id: number
+}
+
+export const removeFromFavouriteList = (id: any): removeFromFavouriteListType => ({
+  type: 'REMOVE_FROM_FAVOURITE_LIST',
+  id
+})
+
+type ActionsType = fetchingDataStatusType | beersLoadType | pageChangeType;
 
 export const getBeerListThunk = (currentPage: number, sort: string) => {
   return function (dispatch: Dispatch<ActionsType>) {

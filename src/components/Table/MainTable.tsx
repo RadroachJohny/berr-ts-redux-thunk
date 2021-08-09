@@ -8,13 +8,15 @@ import TableRow from './TableRow/TableRow';
 import Alert from '@material-ui/lab/Alert';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import ProductModal from '../CartModal/ProductCartModal';
-import {Button} from "@material-ui/core";
+import FavouriteModal from '../FavouriteModal/FavouriteModal';
+import {Button} from '@material-ui/core';
 
 import {currentBeerElem, getBeerListThunk, beersLoad, reverseSorting, removeStatusMessage} from '../../redux/actions';
-import {IBeer, IState, IPurchasedBeer } from '../../redux/types';
-
+import { IBeer, IState } from '../../redux/types';
 import sortedList from '../../helpers';
+
 import classes from './styles.module.scss';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -35,6 +37,11 @@ const useStyles = makeStyles((theme) => ({
     position: 'absolute',
     bottom: '20%',
     right: '5%',
+  },
+  favBtn: {
+    position: 'absolute',
+    bottom: '30%',
+    right: '5%',
   }
 
 }));
@@ -42,6 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
 const MainTable = ({toggleChart} : {toggleChart: () => void}) => {
   const [showCart, setShowCart] = useState(false);
+  const [showFavModal, setShowFavModal] = useState(false);
   const dispatch = useDispatch()
   const classUi = useStyles();
 
@@ -56,12 +64,10 @@ const MainTable = ({toggleChart} : {toggleChart: () => void}) => {
 
   useEffect(() => {
     dispatch(getBeerListThunk(page, sort))
-  }, [page])
-  // }, [page, dispatch, sort])
+  }, [page, dispatch, sort])
 
   useEffect(() => {
     if (alertStatus) {
-      // @ts-ignore
       const showStatusMessageTimer = setTimeout(() => {
         dispatch(removeStatusMessage())
       }, 2000)
@@ -71,21 +77,22 @@ const MainTable = ({toggleChart} : {toggleChart: () => void}) => {
       }
     }
   }, [alertStatus, dispatch])
-  // }, [alertStatus])
 
   useEffect(() => {
-    if(!purchasedBeerList.length && beers.length && showCart) {
+    if(purchasedBeerList.length === 0 && beers.length && showCart) {
       toggleModal();
     }
   }, [purchasedBeerList])
 
   const currentElemModal = (beer: IBeer) => {
-    console.log(beer)
     dispatch(currentBeerElem(beer));
   }
 
   const toggleModal = () => {
     setShowCart(prev => !prev)
+  }
+  const toggleFavouritesModal = () => {
+    setShowFavModal(prev => !prev)
   }
 
   const dispatchSortedList = useCallback(() => {
@@ -98,7 +105,7 @@ const MainTable = ({toggleChart} : {toggleChart: () => void}) => {
       dispatch(reverseSorting(newSort));
       const sortedBeer = sortedList(beers, newSort)
       dispatch(beersLoad(sortedBeer));
-    }, [dispatch, beers])
+    }, [dispatch, beers, sort])
   ;
 
 
@@ -124,6 +131,7 @@ const MainTable = ({toggleChart} : {toggleChart: () => void}) => {
 						<th className={classes['table-photo']}>Photo</th>
 						<th onClick={dispatchSortedList} className={classes['table-abv']}>ABV</th>
 						<th className={classes['table-add']}>Add</th>
+						<th className={classes['table-fav']}>Favourite</th>
 					</tr>
 					</thead>
 
@@ -136,6 +144,7 @@ const MainTable = ({toggleChart} : {toggleChart: () => void}) => {
               abv={beer.abv}
               onClick={() => currentElemModal(beer)}
               id={beer.id}
+              showFav={true}
             />
           ))}
 				</table>}
@@ -145,7 +154,9 @@ const MainTable = ({toggleChart} : {toggleChart: () => void}) => {
       <Navigation toggleChart={toggleChart}/>
     </div>
     <Button onClick={toggleModal} className={classUi.cartBtn} variant="contained" color="primary">CART</Button>
+    <Button onClick={toggleFavouritesModal} className={classUi.favBtn} variant="contained" color="primary">Favourites List</Button>
     {showCart && <ProductModal hideModal={toggleModal}/>}
+    {showFavModal && <FavouriteModal hideModal={toggleFavouritesModal}/>}
   </div>
 };
 

@@ -69,12 +69,10 @@ class AbvChart extends Component<AbvState, {arrBeers: IBeer[] | undefined}> {
                   target: "data",
                   eventHandlers: {
                     onClick: (e: any) => {
-                      console.log(e)
                       return [
                         {
                           target: 'data',
                           mutation: (props: any) => {
-                            console.log(props)
                             this.openBeerInfoModal(props.datum.id);
                           }
                         }

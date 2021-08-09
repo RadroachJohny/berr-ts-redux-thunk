@@ -1,8 +1,8 @@
 import React, { useRef } from 'react';
 import { useSelector } from 'react-redux';
 
-import TableRow from "../Table/TableRow/TableRow";
-import { IBeerElem, IState } from "../../redux/types";
+import TableRow from '../Table/TableRow/TableRow';
+import { IBeerElem, IState } from '../../redux/types';
 
 import classes from './styles.module.scss';
 
@@ -38,7 +38,6 @@ const ProductCartModal = (props: {hideModal: ()=> void}) => {
 					</thead>
 
           {purchasedBeerList.length && purchasedBeerList.map((beer: IBeerElem) => (
-
             <TableRow
               key={beer.id}
               name={beer.name}
@@ -49,6 +48,7 @@ const ProductCartModal = (props: {hideModal: ()=> void}) => {
               quantity={beer.quantity}
             />
           ))}
+
 				</table>}
       </div>
     </div>

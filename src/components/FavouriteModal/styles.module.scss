@@ -1,0 +1,106 @@
+.fav {
+  &-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(149, 158, 97, 0.5);
+  }
+
+  &-modal {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px;
+    width: 50%;
+    overflow-y: auto;
+    height: 600px;
+    background-color: #fff;
+    & svg > g:nth-child(2) text {
+      width: 0 !important;
+      overflow: hidden !important;
+      & tspan {
+        font-size: 5px !important;
+      }
+
+    }
+  }
+  
+  &-card {
+    margin-right: 2%;
+    margin-bottom: 0.5rem;
+    padding: 10px;
+    width: 32%;
+    height: 260px;
+    background-color: #f1ebec;
+    border-radius: 5px;
+    &:nth-child(3n + 3) {
+      margin-right: 0;
+    }
+  }
+
+  &-img {
+    height: 100%;
+    object-fit: cover;
+    &-wrapper {
+      margin: 0 auto 20px;
+      text-align: center;
+      width: 80%;
+      height: 120px;
+    }
+  }
+
+  &-descr {
+    text-align: center;
+    & > p {
+      margin: 0;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+    & > span {
+      display: block;
+      margin-bottom: 5px;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+  }
+}
+
+.close  {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+  background-color: #bfd411;
+  border-radius: 50%;
+  top: 10%;
+  right: 10%;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.remove {
+  display: block;
+  background-color: #fff;
+  font-size: 14px;
+  padding: 5px 10px;
+  margin: 10px auto 0;
+  border: none;
+  cursor: pointer;
+}
+
+.noFavs {
+  width: 100%;
+  text-align: center;
+  align-self: center;
+}
